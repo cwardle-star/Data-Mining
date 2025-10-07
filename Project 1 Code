@@ -59,7 +59,7 @@ plt.axvspan(2008, 2009, alpha=0.1)     # Global Financial Crisis
 plt.axvspan(2020, 2020.9, alpha=0.1)   # COVID 
 plt.axvspan(2022, 2024, alpha=0.05)    # Rate-hike cycle
 
-# plt.tight_layout() automatically adjusts padding so that my labels/titles aren’t cut off
+# plt.tight_layout() automatically adjusts the padding so that my labels/titles aren’t cut off
 plt.tight_layout()
 
 # plt.show() brings the figure to the screen so show it
@@ -71,45 +71,51 @@ for bank, g in combo.groupby("Bank"):
     g = g.sort_values("Year")
     plt.plot(g["Year"], g["ROA"], label=bank)
 
+# plotting axis variables again
 plt.xlabel("Year")
 plt.ylabel("ROA")
-plt.title("Return on Assets (2005–2024)")
+plt.title("Return on Assets (2005–2024)") #title
 plt.legend()
 
-# Same shaded windows
+# same shaded areas
 plt.axvspan(2008, 2009, alpha=0.1)
 plt.axvspan(2020, 2020.9, alpha=0.1)
 plt.axvspan(2022, 2024, alpha=0.05)
 
+# automatically adjusts the spacing between plot elements like the titles, labels, and legends
 plt.tight_layout()
 plt.show()
 
-# graph 3 profit margin
+# graph 3 profit margin 
+# again giving the width and height 
 plt.figure(figsize=(10, 6))
 for bank, g in combo.groupby("Bank"):
     g = g.sort_values("Year")
     # in case some CSVs don’t have this column
+    # checks whether the dataframe "g" has the column profit margin then g.columns returns the list of all column names in the dataframe
     if "Profit Margin" in g.columns:
         plt.plot(g["Year"], g["Profit Margin"], label=bank)
 
+# plotting axis/title
 plt.xlabel("Year")
 plt.ylabel("Profit Margin")
 plt.title("Profit Margin (2005–2024)")
 plt.legend()
 
+#highlighted regions
 plt.axvspan(2008, 2009, alpha=0.1)
 plt.axvspan(2020, 2020.9, alpha=0.1)
 plt.axvspan(2022, 2024, alpha=0.05)
 
+#adjusting the spacing to fit
 plt.tight_layout()
 plt.show()
 
 # graph 4 asset turnover 
 plt.figure(figsize=(10, 6))
 for bank, g in combo.groupby("Bank"):
-    g = g.sort_values("Year")
+    g = g.sort_values("Year") # this loops through each bank’s data, sorts it by year, and if the Asset Turnover column exists, plots that bank’s asset turnover ratio over time.
     if "Asset Turnover" in g.columns:
-        # Asset Turnover = Revenue / Assets (unitless ratio), plotted over time.
         plt.plot(g["Year"], g["Asset Turnover"], label=bank)
 
 plt.xlabel("Year")
@@ -124,10 +130,10 @@ plt.axvspan(2022, 2024, alpha=0.05)
 plt.tight_layout()
 plt.show()
 
-# -------------- GRAPH 5: Equity-to-Assets over time --------------
+# graph 5 equity-to-assets over time 
 plt.figure(figsize=(10, 6))
 for bank, g in combo.groupby("Bank"):
-    g = g.sort_values("Year")
+    g = g.sort_values("Year") # It sorts each bank’s data by year and, if the Equity_to_Assets column exists, plots that bank’s equity-to-assets ratio over time.
     if "Equity_to_Assets" in g.columns:
         plt.plot(g["Year"], g["Equity_to_Assets"], label=bank)
 
@@ -143,9 +149,9 @@ plt.axvspan(2022, 2024, alpha=0.05)
 plt.tight_layout()
 plt.show()
 
-# -------------- GRAPH 6: Total Revenue over time --------------
+# graph 7 total revenue over time 
 plt.figure(figsize=(10, 6))
-for bank, g in combo.groupby("Bank"):
+for bank, g in combo.groupby("Bank"): # this loops through each bank’s data, sorts it by year, and plots a line showing that bank’s total revenue over time.
     g = g.sort_values("Year")
     # Assumes "Total Revenue" is numeric (e.g., USD in millions). If not, convert like earlier.
     plt.plot(g["Year"], g["Total Revenue"], label=bank)
@@ -162,12 +168,13 @@ plt.axvspan(2022, 2024, alpha=0.05)
 plt.tight_layout()
 plt.show()
 
-# -------------- GRAPH 7: Net Income over time --------------
-plt.figure(figsize=(10, 6))
+# graph 7 net income over time 
+plt.figure(figsize=(10, 6)) # this loops through each bank’s data, sorts it by year, and plots a line showing that bank’s net income over time.
 for bank, g in combo.groupby("Bank"):
     g = g.sort_values("Year")
     plt.plot(g["Year"], g["Net Income"], label=bank)
 
+#labels and axis 
 plt.xlabel("Year")
 plt.ylabel("Net Income (USD Millions)")
 plt.title("Net Income (2005–2024)")
